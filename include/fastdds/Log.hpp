@@ -15,11 +15,13 @@
 #ifndef _FASTDDS_DDS_LOG_LOG_HPP_
 #define _FASTDDS_DDS_LOG_LOG_HPP_
 
-#include <fastrtps/fastrtps_dll.h>
+//#include <fastrtps/fastrtps_dll.h>
 #include <thread>
 #include <sstream>
 #include <atomic>
 #include <regex>
+
+#define RTPS_DllAPI
 
 /**
  * eProsima log layer. Logging categories and verbosity can be specified dynamically at runtime.

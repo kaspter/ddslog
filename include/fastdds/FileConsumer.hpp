@@ -20,8 +20,8 @@
 #ifndef _FASTDDS_DDS_LOG_FILECONSUMER_HPP_
 #define _FASTDDS_DDS_LOG_FILECONSUMER_HPP_
 
-#include <fastdds/dds/log/Log.hpp>
-#include <fastdds/dds/log/OStreamConsumer.hpp>
+#include <fastdds/Log.hpp>
+#include <fastdds/OStreamConsumer.hpp>
 
 #include <fstream>
 

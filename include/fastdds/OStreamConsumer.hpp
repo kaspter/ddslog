@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-#include <fastdds/dds/log/Log.hpp>
+#include <fastdds/Log.hpp>
 
 namespace eprosima {
 namespace fastdds {

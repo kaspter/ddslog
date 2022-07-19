@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <fastdds/dds/log/FileConsumer.hpp>
+#include <fastdds/FileConsumer.hpp>
 #include <iomanip>
 
 namespace eprosima {

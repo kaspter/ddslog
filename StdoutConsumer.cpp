@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <fastdds/dds/log/StdoutConsumer.hpp>
+#include <fastdds/StdoutConsumer.hpp>
 #include <iostream>
 #include <iomanip>
 

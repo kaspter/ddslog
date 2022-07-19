@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <fastdds/dds/log/StdoutErrConsumer.hpp>
+#include <fastdds/StdoutErrConsumer.hpp>
 #include <iomanip>
 
 namespace eprosima {

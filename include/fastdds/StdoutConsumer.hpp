@@ -15,8 +15,8 @@
 #ifndef _FASTDDS_DDS_LOG_STDOUTCONSUMER_HPP_
 #define _FASTDDS_DDS_LOG_STDOUTCONSUMER_HPP_
 
-#include <fastdds/dds/log/Log.hpp>
-#include <fastdds/dds/log/OStreamConsumer.hpp>
+#include <fastdds/Log.hpp>
+#include <fastdds/OStreamConsumer.hpp>
 
 namespace eprosima {
 namespace fastdds {

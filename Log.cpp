@@ -16,13 +16,13 @@
 #include <iomanip>
 #include <mutex>
 
-#include <fastrtps/utils/DBQueue.h>
+#include <fastdds/DBQueue.h>
 
-#include <fastdds/dds/log/Log.hpp>
-#include <fastdds/dds/log/OStreamConsumer.hpp>
-#include <fastdds/dds/log/StdoutConsumer.hpp>
-#include <fastdds/dds/log/StdoutErrConsumer.hpp>
-#include <fastdds/dds/log/Colors.hpp>
+#include <fastdds/Log.hpp>
+#include <fastdds/OStreamConsumer.hpp>
+#include <fastdds/StdoutConsumer.hpp>
+#include <fastdds/StdoutErrConsumer.hpp>
+#include <fastdds/Colors.hpp>
 #include <iostream>
 
 using namespace std;
