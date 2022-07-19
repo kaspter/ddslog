@@ -360,11 +360,11 @@ void LogConsumer::print_header(
 
     std::string white = (color) ? C_B_WHITE : "";
 
-    std::string kind = (entry.kind == Log::Kind::Error) ? "Error" :
-            (entry.kind == Log::Kind::Warning) ? "Warning" :
-            (entry.kind == Log::Kind::Info) ? "Info" : "";
+    std::string kind = (entry.kind == Log::Kind::Error) ? "E" :
+            (entry.kind == Log::Kind::Warning) ? "W" :
+            (entry.kind == Log::Kind::Info) ? "I" : "";
 
-    stream << c_b_color << "[" << white << entry.context.category << c_b_color << " " << kind << "] ";
+    stream << c_b_color << "[" << white << entry.context.category << c_b_color << "/" << kind << "] ";
 }
 
 void LogConsumer::print_context(
@@ -378,17 +378,18 @@ void LogConsumer::print_context(
     }
     if (entry.context.filename)
     {
-        stream << " (" << entry.context.filename;
-        stream << ":" << entry.context.line << ")";
+        stream << entry.context.filename << "|";;
+
     }
     if (entry.context.function)
     {
-        stream << " -> Function ";
+        //stream << " -> Function ";
         if (color)
         {
             stream << C_CYAN;
         }
         stream << entry.context.function;
+        stream << "@" << entry.context.line << "| ";
     }
 }
 
