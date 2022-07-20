@@ -56,3 +56,15 @@ target_include_directories(ddslogTest_c PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_libraries(ddslogTest_c ddslog pthread)
+
+
+add_executable(ddslogBenchmark
+    example/benchmark.cpp
+)
+
+#target_compile_features(ddslogTest PRIVATE cxx_std_17)
+target_include_directories(ddslogBenchmark PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_link_libraries(ddslogBenchmark ddslog pthread)
