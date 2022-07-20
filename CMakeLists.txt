@@ -20,17 +20,24 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -rdynamic -fPIC")
 # -Wno-deprecated-declarations: 不要警告使用带deprecated属性的变量，类型，函数
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated -Wno-deprecated-declarations")
 
-
-
-set(ddslog_SRCS Log.cpp OStreamConsumer StdoutErrConsumer.cpp StdoutConsumer.cpp FileConsumer.cpp)
+set(ddslog_SRCS
+    src/Log.cpp
+    src/OStreamConsumer
+    src/StdoutErrConsumer.cpp
+    src/StdoutConsumer.cpp
+    src/FileConsumer.cpp
+)
 
 add_library(ddslog ${ddslog_SRCS})
 target_include_directories(ddslog PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
+add_executable(ddslogTest
+    example/main.cpp
+    example/example.cpp
+)
 
-add_executable(ddslogTest example/main.cpp example/example.cpp)
 #target_compile_features(ddslogTest PRIVATE cxx_std_17)
 target_include_directories(ddslogTest PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
