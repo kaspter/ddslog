@@ -12,13 +12,6 @@
 #include <fastdds/StdoutConsumer.hpp>
 #include <fastdds/StdoutErrConsumer.hpp>
 
-enum Kind
-{
-    Error,
-    Warning,
-    Info,
-};
-
 
 #define logI(cat, msg) logInfo_(cat, msg)
 //! Logs a warning. Disable reporting through Log::SetVerbosity or define LOG_NO_WARNING
@@ -39,8 +32,7 @@ using FileConsumer   = eprosima::fastdds::dds::FileConsumer;
 using StdoutConsumer = eprosima::fastdds::dds::StdoutConsumer;
 using StdoutErrConsumer = eprosima::fastdds::dds::StdoutErrConsumer;
 
-
-static inline void logKindF_(Log::Kind kind, const char *category, const char *function, int line, const char *const fmt, ...)
+static inline void logKindF_(int kind, const char *category, const char *function, int line, const char *const fmt, ...)
 {
     using namespace ddslog;
     auto         temp   = std::vector<char>{};
@@ -53,7 +45,7 @@ static inline void logKindF_(Log::Kind kind, const char *category, const char *f
         va_end(args);
         length = static_cast<std::size_t>(status);
     }
-    Log::QueueLog(temp.data(), Log::Context{__FILE__, line, function, category}, kind);
+    Log::QueueLog(temp.data(), Log::Context{__FILE__, line, function, category}, static_cast<Log::Kind>(kind));
 }
 
 

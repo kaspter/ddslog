@@ -29,7 +29,7 @@ int main()
 
     // log verbosity runtime setting
     Log::SetVerbosity(Log::Info);
-    Log::ReportFilenames(true);
+    Log::ReportFilenames(false);
 
     logE(TAG, "This should be logged");
     logW(TAG, "This should be logged too!");
