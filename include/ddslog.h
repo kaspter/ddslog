@@ -26,8 +26,10 @@ enum Kind
 //! Logs an error. Disable reporting through define LOG_NO_ERROR
 #define logE(cat, msg) logError_(cat, msg)
 
-#define logInfoF_(cat, fmt, ...) logFormatF_(cat, Kind::Info, fmt, __VA_ARGS__)
-
+//! C style logs
+#define logInfoF(cat, fmt, ...) logInfoF_(cat, fmt, __VA_ARGS__)
+#define logWarnF(cat, fmt, ...) logWarnF_(cat, fmt, __VA_ARGS__)
+#define logErrorF(cat, fmt, ...) logErrorF_(cat, fmt, __VA_ARGS__)
 
 namespace ddslog {
 
@@ -37,12 +39,12 @@ using FileConsumer   = eprosima::fastdds::dds::FileConsumer;
 using StdoutConsumer = eprosima::fastdds::dds::StdoutConsumer;
 using StdoutErrConsumer = eprosima::fastdds::dds::StdoutErrConsumer;
 
-static inline void logFormatF_(const char *category, Kind level, const char *const fmt, ...)
+
+static inline void logKindF_(Log::Kind kind, const char *category, const char *function, int line, const char *const fmt, ...)
 {
     using namespace ddslog;
     auto         temp   = std::vector<char>{};
     auto         length = std::size_t{128};
-    Log::Kind   kind = (Log::Kind)level;
     std::va_list args;
     while (temp.size() <= length) {
         temp.resize(length + 1);
@@ -51,8 +53,38 @@ static inline void logFormatF_(const char *category, Kind level, const char *con
         va_end(args);
         length = static_cast<std::size_t>(status);
     }
-    Log::QueueLog(temp.data(), Log::Context{__FILE__, __LINE__, __func__, category}, kind);
+    Log::QueueLog(temp.data(), Log::Context{__FILE__, line, function, category}, kind);
 }
+
+
+#define logInfoF_(cat, fmt, ...)                                                                        \
+    {                                                                                                   \
+        using namespace ddslog;                                                                       \
+        if (Log::GetVerbosity() >= Log::Kind::Info)                                                    \
+        {                                                                                               \
+            logKindF_(Log::Kind::Info, cat, __func__, __LINE__, fmt, __VA_ARGS__);                     \
+        }                                                                                               \
+    }
+
+
+#define logWarnF_(cat, fmt, ...)                                                                        \
+    {                                                                                                   \
+        using namespace ddslog;                                                                       \
+        if (Log::GetVerbosity() >= Log::Kind::Warning)                                                 \
+        {                                                                                               \
+            logKindF_(Log::Kind::Warning, cat, __func__, __LINE__, fmt, __VA_ARGS__);                  \
+        }                                                                                               \
+    }
+
+#define logErrorF_(cat, fmt, ...)                                                                       \
+    {                                                                                                   \
+        using namespace ddslog;                                                                       \
+        if (Log::GetVerbosity() >= Log::Kind::Error)                                                   \
+        {                                                                                               \
+            logKindF_(Log::Kind::Error, cat, __func__, __LINE__, fmt, __VA_ARGS__);                    \
+        }                                                                                               \
+    }
+
 
 } // namespace ddslog
 

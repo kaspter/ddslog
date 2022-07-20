@@ -38,7 +38,10 @@ int main()
 
 
     int i = 2;
-    logInfoF_("123", "asdsa %d---112233445566778899", i);
+    logInfoF("123", "Info asdsa %d---FileConsumer", i);
+    logWarnF("123", "Warn asdsa %d---FileConsumer", i);
+    logErrorF("123", "Error asdsa %d---FileConsumer", i);
+
 
     // Wait till the queues are empty then add new LogConsumer
     Log::Flush();
@@ -46,6 +49,9 @@ int main()
 
     LogABB();
 
+    logInfoF("321", "Info asdsa %d---FileConsumer + StdoutConsumer", i);
+    logWarnF("321", "Warn asdsa %d---FileConsumer + StdoutConsumer", i);
+    logErrorF("321", "Error asdsa %d---FileConsumer + StdoutConsumer", i);
 
     Log::SetVerbosity(Log::Warning);
     logE(TAG, "This should be logged");
