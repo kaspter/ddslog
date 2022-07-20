@@ -51,6 +51,9 @@ public:
 
     virtual ~FileConsumer();
 
+    RTPS_DllAPI void Consume(
+            const Log::Entry& entry);
+
 private:
 
     /** \internal

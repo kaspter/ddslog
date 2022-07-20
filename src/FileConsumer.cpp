@@ -45,6 +45,20 @@ FileConsumer::~FileConsumer()
     file_.close();
 }
 
+
+void FileConsumer::Consume(
+        const Log::Entry& entry)
+{
+    std::ostream& stream = get_stream(entry);
+    print_timestamp(stream, entry, false);
+    print_header(stream, entry, false);
+    print_context(stream, entry, false);
+    print_message(stream, entry, false);
+    print_new_line(stream, false);
+    stream.flush();
+}
+
+
 std::ostream& FileConsumer::get_stream(
         const Log::Entry& entry)
 {
