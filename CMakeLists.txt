@@ -26,6 +26,7 @@ set(ddslog_SRCS
     src/StdoutErrConsumer.cpp
     src/StdoutConsumer.cpp
     src/FileConsumer.cpp
+    src/ddslog.cpp
 )
 
 add_library(ddslog ${ddslog_SRCS})
@@ -45,3 +46,13 @@ target_include_directories(ddslogTest PRIVATE
 )
 target_link_libraries(ddslogTest ddslog pthread)
 
+
+add_executable(ddslogTest_c
+    example/main.c
+)
+
+target_include_directories(ddslogTest_c PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_link_libraries(ddslogTest_c ddslog pthread)
