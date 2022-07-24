@@ -260,10 +260,7 @@ protected:
 #endif // ifndef LOG_NO_WARNING
 
 // Allow multiconfig platforms like windows to disable info queueing on Release and other non-debug configs
-#if !HAVE_LOG_NO_INFO &&  \
-    (defined(FASTDDS_ENFORCE_LOG_INFO) || \
-    ((defined(__INTERNALDEBUG) || defined(_INTERNALDEBUG)) && (defined(_DEBUG) || defined(__DEBUG) || \
-    !defined(NDEBUG))))
+#if !HAVE_LOG_NO_INFO
 #define logInfo_(cat, msg)                                                                              \
     {                                                                                                   \
         using namespace eprosima::fastdds::dds;                                                         \
