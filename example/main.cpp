@@ -5,6 +5,8 @@
 
 //#define LOG_NO_ERROR
 
+#define NDEBUG
+
 #include <ddslog.h>
 
 #include "example.hpp"
@@ -16,7 +18,7 @@ using namespace ddslog;
 #define AML_LOGI(x) logI(TAG, x)
 #define AML_LOGD(x) logI(TAG, x)
 #define AML_LOGW(x) logW(TAG, x)
-#define AML_LOGE(x) logE(TAG, x)
+#define AML_LOGE(fmt, ...) logErrorF(TAG, fmt, __VA_ARGS__)
 
 int main()
 {
@@ -31,16 +33,16 @@ int main()
     Log::SetVerbosity(Log::Info);
     Log::ReportFilenames(false);
 
-    logE(TAG, "This should be logged");
+    logE(TAG, "This error should be logged");
     logW(TAG, "This should be logged too!");
     logI(TAG, "This should be logged too!");
-    AML_LOGD("This should be logged too too!");
-
+    AML_LOGD("This AML_lOGD should be logged too too!");
+    AML_LOGE("xxxxxxxxxxxxxxxxxXXX =%d", 123);
 
     int i = 2;
-    logInfoF("123", "Info asdsa %d---FileConsumer", i);
-    logWarnF("123", "Warn asdsa %d---FileConsumer", i);
-    logErrorF("123", "Error asdsa %d---FileConsumer", i);
+    logInfoF(TAG, "Info asdsa %d---FileConsumer", i);
+    logWarnF(TAG, "Warn asdsa %d---FileConsumer", i);
+    logErrorF(TAG, "Error asdsa %d---FileConsumer", i);
 
 
     // Wait till the queues are empty then add new LogConsumer
@@ -49,9 +51,16 @@ int main()
 
     LogABB();
 
-    logInfoF("321", "Info asdsa %d---FileConsumer + StdoutConsumer", i);
-    logWarnF("321", "Warn asdsa %d---FileConsumer + StdoutConsumer", i);
-    logErrorF("321", "Error asdsa %d---FileConsumer + StdoutConsumer", i);
+
+    logE(TAG, "This error should be logged");
+    logW(TAG, "This should be logged too!");
+    logI(TAG, "This should be logged too!");
+    AML_LOGD("This AML_lOGD should be logged too too!");
+    AML_LOGE("xxxxxxxxxxxxxxxxxXXX =%d", 123);
+
+    logInfoF(TAG, "Info asdsa %d---FileConsumer + StdoutConsumer", i);
+    logWarnF(TAG, "Warn asdsa %d---FileConsumer + StdoutConsumer", i);
+    logErrorF(TAG, "Error asdsa %d---FileConsumer + StdoutConsumer", i);
 
     Log::SetVerbosity(Log::Warning);
     logE(TAG, "This should be logged");
@@ -74,6 +83,8 @@ int main()
 
     // Log::ReportFilenames(false);
 
+
+
     // log category filter
     Log::SetVerbosity(Log::Info);
     Log::SetCategoryFilter(std::regex("(Good)"));
@@ -82,6 +93,7 @@ int main()
     logW(EvenMoreGoodCategory, "This should be logged too!");
 
 #endif
+
     // Wait till the queues are empty
     Log::Flush();
 
