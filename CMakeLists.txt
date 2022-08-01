@@ -22,7 +22,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function -Wno-builtin-macro-
 
 set(ddslog_SRCS
     src/Log.cpp
-    src/OStreamConsumer
+    src/OStreamConsumer.cpp
     src/StdoutErrConsumer.cpp
     src/StdoutConsumer.cpp
     src/FileConsumer.cpp
