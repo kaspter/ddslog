@@ -330,13 +330,17 @@ void Log::get_timestamp(
 #if defined(_WIN32)
     struct tm timeinfo;
     localtime_s(&timeinfo, &now_c);
-    stream << std::put_time(&timeinfo, "%F %T") << "." << std::setw(3) << std::setfill('0') << ms << " ";
     //#elif defined(__clang__) && !defined(std::put_time) // TODO arm64 doesn't seem to support std::put_time
     //    (void)now_c;
     //    (void)ms;
+#elif (_POSIX_C_SOURCE >= 1) || defined(_XOPEN_SOURCE) || defined(_BSD_SOURCE) || defined(_SVID_SOURCE) || \
+    defined(_POSIX_SOURCE) || defined(__unix__)
+    std::tm timeinfo;
+    localtime_r(&now_c, &timeinfo);
 #else
-    stream << std::put_time(localtime(&now_c), "%F %T") << "." << std::setw(3) << std::setfill('0') << ms << " ";
+    std::tm timeinfo = *localtime(&now_c);
 #endif // if defined(_WIN32)
+    stream << std::put_time(&timeinfo, "%F %T") << "." << std::setw(3) << std::setfill('0') << ms << " ";
     timestamp = stream.str();
 }
 
