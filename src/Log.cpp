@@ -275,10 +275,7 @@ void Log::QueueLog(
     }
 
     std::string timestamp;
-    {
-        std::unique_lock<std::mutex> guard(resources_.cv_mutex);
-        get_timestamp(timestamp);
-    }
+    get_timestamp(timestamp);
     resources_.logs.Push(Log::Entry{message, context, kind, timestamp});
     {
         std::unique_lock<std::mutex> guard(resources_.cv_mutex);
