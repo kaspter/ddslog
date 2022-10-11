@@ -52,7 +52,7 @@ public:
     virtual ~FileConsumer();
 
     RTPS_DllAPI void Consume(
-            const Log::Entry& entry);
+            const Log::Entry& entry) override;
 
 private:
 
