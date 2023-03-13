@@ -64,11 +64,6 @@ enum Kind
     Kind_Info,
 };
 
-//! C style logs
-#define logInfoF(cat, fmt, ...) logInfoF_(cat, fmt, __VA_ARGS__)
-#define logWarnF(cat, fmt, ...) logWarnF_(cat, fmt, __VA_ARGS__)
-#define logErrorF(cat, fmt, ...) logErrorF_(cat, fmt, __VA_ARGS__)
-
 void ddslog_init(int kind, const char* filename);
 void ddslog_exit(void);
 void ddslog_printf(int kind, const char *category, const char *function, int line, const char *const fmt, ...);
@@ -79,7 +74,7 @@ bool ddslog_kind_enabled(int kind);
     {                                                                                                   \
         if (ddslog_kind_enabled(Kind_Info))                                                             \
         {                                                                                               \
-            ddslog_printf(Kind_Info, #cat, __func__, __LINE__, fmt, __VA_ARGS__);                       \
+            ddslog_printf(Kind_Info, #cat, __func__, __LINE__, fmt, ##__VA_ARGS__);                     \
         }                                                                                               \
     }
 
@@ -88,7 +83,7 @@ bool ddslog_kind_enabled(int kind);
     {                                                                                                   \
         if (ddslog_kind_enabled(Kind_Warning))                                                          \
         {                                                                                               \
-            ddslog_printf(Kind_Warning, #cat, __func__, __LINE__, fmt, __VA_ARGS__);                    \
+            ddslog_printf(Kind_Warning, #cat, __func__, __LINE__, fmt, ##__VA_ARGS__);                  \
         }                                                                                               \
     }
 
@@ -96,9 +91,15 @@ bool ddslog_kind_enabled(int kind);
     {                                                                                                   \
         if (ddslog_kind_enabled(Kind_Error))                                                            \
         {                                                                                               \
-            ddslog_printf(Kind_Error, #cat, __func__, __LINE__, fmt, __VA_ARGS__);                      \
+            ddslog_printf(Kind_Error, #cat, __func__, __LINE__, fmt, ##__VA_ARGS__);                    \
         }                                                                                               \
     }
+
+//! C style logs
+#define logInfoF(cat, fmt, ...) logInfoF_(cat, fmt, ##__VA_ARGS__)
+#define logWarnF(cat, fmt, ...) logWarnF_(cat, fmt, ##__VA_ARGS__)
+#define logErrorF(cat, fmt, ...) logErrorF_(cat, fmt, ##__VA_ARGS__)
+
 
 #ifdef __cplusplus
 } /* extern "C" */
