@@ -369,7 +369,7 @@ void LogConsumer::print_header(
             (entry.kind == Log::Kind::Warning) ? "W" :
             (entry.kind == Log::Kind::Info) ? "I" : "";
 
-    stream << c_b_color << "[" << white << entry.context.category << c_b_color << "/" << kind << "] ";
+    stream << c_b_color << "[" << kind << "/" << white << entry.context.category << c_b_color << "] ";
 }
 
 void LogConsumer::print_context(
