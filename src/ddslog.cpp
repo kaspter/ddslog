@@ -61,6 +61,10 @@ void ddslog_exit(void)
     Log::KillThread();
 }
 
+void ddslog_kind(int kind)
+{
+    Log::SetVerbosity(static_cast<Log::Kind>(kind));
+}
 
 bool ddslog_kind_enabled(int kind)
 {

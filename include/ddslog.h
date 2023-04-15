@@ -68,6 +68,7 @@ void ddslog_init(int kind, const char* filename);
 void ddslog_exit(void);
 void ddslog_printf(int kind, const char *category, const char *function, int line, const char *const fmt, ...);
 
+void ddslog_kind(int kind);
 bool ddslog_kind_enabled(int kind);
 
 #define logInfoF_(cat, fmt, ...)                                                                        \
